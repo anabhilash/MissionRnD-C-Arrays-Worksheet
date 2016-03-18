@@ -79,12 +79,12 @@ namespace spec
 
 		TEST_METHOD(positiveKValue)
 		{
-			struct student students[3] = { { "stud1", 50 }, { "stud2", 60 }, { "stud3", 70 } };
+			struct student students[3] = { { "stud1", 50 }, { "stud2", 60 }, { "stud3", 70 } }, students1[6] = { { "stud1", 30 }, { "stud2", 10 }, { "stud3", 60 }, { "stud4", 50 }, { "stud5", 20 }, { "stud6", 40 } };
 			struct student **result = topKStudents(students, 3, 2);
 			int exp[] = { 60, 70 };
 			Assert::IsTrue(validate(exp, 2, result), L"K value 2 case failed.", LINE_INFO());
 
-			struct student students1[6] = { { "stud1", 30 }, { "stud2", 10 }, { "stud3", 60 }, { "stud4", 50 }, { "stud5", 20 }, { "stud6", 40 } };
+			
 			struct student **result1 = topKStudents(students1, 6, 3);
 			int exp1[] = { 40, 50, 60 };
 			Assert::IsTrue(validate(exp1, 3, result1), L"K value 3 case failed.", LINE_INFO());

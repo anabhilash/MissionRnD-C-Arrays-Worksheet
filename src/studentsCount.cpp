@@ -15,6 +15,82 @@ NOTES:
 
 #include <stdio.h>
 
-void * studentsCount(int *Arr, int len, int score, int *lessCount, int *moreCount) {
+int binary(int *a, int length, int score);
+
+void * studentsCount(int *Arr, int len, int score, int *lessCount, int *moreCount)
+{
+	int binary(int *, int, int);
+	if (Arr == NULL || len <= 0 || score <= 0)
+	{
+		return NULL;
+	}
+	int k = binary(Arr, len, score);
+	int count = 0, temp, lowcount = 0, upcount = 0;
+	temp = k - 1;
+	while (Arr[temp] == score&&temp >= 0)
+	{
+		lowcount++;
+		temp--;
+	}
+	temp = k + 1;
+	while (Arr[temp] == score&&temp < len)
+	{
+		upcount++;
+		temp++;
+	}
+	if (k < 0)
+	{
+		*lessCount = 0;
+		*moreCount = len;
+	}
+	else if (k >= len)
+	{
+		*lessCount = len;
+		*moreCount = 0;
+	}
+	else{
+		if (Arr[k] == score)
+		{
+			*lessCount = k - lowcount;
+			*moreCount = len - k - upcount - 1;
+		}
+		else{
+			*lessCount = k - lowcount;
+			*moreCount = len - k - upcount;
+		}
+	}
 	return NULL;
 }
+
+int binary(int *a, int length, int score)
+{
+	int low, high, mid;
+	low = 0;
+	high = length - 1;
+	while (low != high)
+	{
+		mid = (low + high) / 2;
+		if (a[mid] == score)
+			return mid;
+		else if (mid > 0 && mid < length&&a[mid - 1]<score&&a[mid + 1]>score)
+		{
+			return mid;
+		}
+		else if (a[mid] < score)
+			low = mid + 1;
+		else
+			high = mid - 1;
+	}
+	if (a[low] == score)
+		return low;
+	else if (a[low]>score)
+		return low - 1;
+	else{
+		return low + 1;
+	}
+}
+
+
+
+
+
